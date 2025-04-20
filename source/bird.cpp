@@ -49,7 +49,7 @@ void Bird::GroundCollision(){
 
 void Bird::Fly(){
     if (!collided || invincible) {
-        velocity = -10.0;
+        velocity = -6.0;
         if (velocity < -2) {
             //sprite_path = "assets/images/bird_sprite_3.png"; -  placeholder
         }
@@ -59,11 +59,8 @@ void Bird::Fly(){
 void Bird::Fall(){
     velocity += gravity;
     y += velocity;
-    if (velocity > 7) {
-        velocity = 7;
-    }
-    if (velocity > 2) {
-        //sprite_path = "assets/images/bird_sprite_2.png"; - placeholder
+    if (velocity > 3.5) {
+        velocity = 3.5;
     }
 }
 
@@ -76,8 +73,14 @@ void Bird::Update(){
 }
 
 void Bird::DrawYourself(Renderer &renderer){
+    int tileOffset = 0;
+
+    if (velocity > -2) {
+        tileOffset = 512; // skip the first sprite (32x16 = 512 bytes for 256-color)
+    }
+
     oamSet(&oamMain, 0, x, y, 0, 0, SpriteSize_32x16, SpriteColorFormat_256Color,
-        spriteGfx, -1, false, false, false, false, false);
+        (u16*)((u8*)spriteGfx + tileOffset), -1, false, false, false, false, false);
 
 }
 
