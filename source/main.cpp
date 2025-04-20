@@ -7,6 +7,22 @@
 //---------------------------------------------------------------------------------
 int main(int argc, char **argv) {
 //---------------------------------------------------------------------------------
+    // Top Screen
+    videoSetMode(MODE_0_2D | DISPLAY_BG0_ACTIVE);
+    // map bank A for backgrounds
+	vramSetBankA(VRAM_A_MAIN_BG);
+    // map bank B for sprites
+    vramSetBankB(VRAM_B_MAIN_SPRITE);
+    // Initialize oam
+    oamInit(&oamMain, SpriteMapping_1D_32, false);
+
+    // Bottom Screen
+    videoSetModeSub(MODE_0_2D);
+    vramSetBankC(VRAM_C_SUB_BG);
+    consoleDemoInit(); // Console debug output
+    BG_PALETTE_SUB[0] = RGB15(13, 7, 6);
+    
+
 	const int screen_width{256};
     const int screen_height{192};
     const int FPS{60};

@@ -1,6 +1,7 @@
 #include "renderer.h"
-//#include "SDL.h"
+#include "tilemap.h"
 #include <iostream>
+#include <nds.h>
 
 Renderer::Renderer(int screen_width, int screen_height) {
     // //Code
@@ -29,6 +30,12 @@ Renderer::Renderer(int screen_width, int screen_height) {
     //     std::cerr << "Renderer could not be created.\n";
     //     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
     // }
+
+
+    BGCTRL[0] = BG_TILE_BASE(1) | BG_MAP_BASE(0) | BG_COLOR_256 | BG_32x32;
+    dmaCopy(tilemapTiles,(void *)CHAR_BASE_BLOCK(1),tilemapTilesLen);
+	dmaCopy(tilemapMap,(void *)SCREEN_BASE_BLOCK(0),tilemapMapLen);
+	dmaCopy(tilemapPal,BG_PALETTE,tilemapPalLen);
 }
 
 Renderer::~Renderer() {
@@ -43,7 +50,7 @@ void Renderer::Render(Bird &bird, Pipe &pipe_1, Pipe &pipe_2){
     // SDL_RenderClear(sdl_renderer);
 
     // DrawBackground(sdl_renderer);
-    // bird.DrawYourself(sdl_renderer);
+    bird.DrawYourself(*this);
     // pipe_1.DrawYourself(sdl_renderer);
     // pipe_2.DrawYourself(sdl_renderer);
 
@@ -51,6 +58,10 @@ void Renderer::Render(Bird &bird, Pipe &pipe_1, Pipe &pipe_2){
 
     // // Update Screen
     // SDL_RenderPresent(sdl_renderer);
+
+
+    swiWaitForVBlank();
+    oamUpdate(&oamMain);
 }
 
 

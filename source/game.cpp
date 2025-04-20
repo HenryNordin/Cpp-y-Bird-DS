@@ -1,5 +1,4 @@
 #include "game.h"
-//#include "SDL.h"
 #include <iostream>
 int score = 0;
 Game::Game(std::size_t grid_width, std::size_t grid_height)
@@ -17,24 +16,19 @@ void Game::Run(Controller const &controller, Renderer &renderer, double MsPerFra
     
 
     while(running) {
-        //frame_start = SDL_GetTicks();
+        consoleClear();
+        iprintf("X: %d, Y: %d\n", (int)bird.GetX(), (int)bird.GetY());
+
         controller.HandleInput(running, bird);
         Update();
         renderer.Render(bird, pipe1, pipe2);
-        //frame_end = SDL_GetTicks();
 
         frame_count++;
-        frame_duration = frame_end - frame_start;
-        if (frame_duration < MsPerFrame) {
-            //SDL_Delay(MsPerFrame - frame_duration);
-        }
     }
-
 }
 
 
 void Game::Update() {
-    //std::cout << "Test" << std::endl;
     bird.Update();
     pipe1.Update(); 
     pipe2.Update();

@@ -2,7 +2,10 @@
 #define BIRD_H
 
 #include <string>
-//#include "SDL.h"
+
+#include <nds.h>
+
+class Renderer;
 
 class Bird {
     public:
@@ -14,8 +17,8 @@ class Bird {
         void Update();
         void Fly();
         void Fall();
-        void DrawYourself();
-            //SDL_Renderer* renderer);
+        void DrawYourself(Renderer &renderer);
+
     private:
         bool collided;
         bool invincible;
@@ -31,8 +34,9 @@ class Bird {
         void GroundCollision();
 
         std::string sprite_path;
-        //SDL_Texture* sprite;
-        //SDL_Rect srcRect;
+
+        int state;
+        u16* spriteGfx;
 };
 
 #endif
