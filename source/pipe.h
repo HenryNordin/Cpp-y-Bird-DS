@@ -9,18 +9,19 @@ class Pipe {
     public:
         Pipe(float x_start);
         void Update();
-        void DrawYourself();
+        void DrawYourself(Renderer &renderer);
         //SDL_Renderer* renderer);
         bool CollideWithBird(Bird bird);
     private:
         float x, upper_y, lower_y, x_start;
-        const float pipe_gap = 420;
+        const float pipe_gap = 380;
         void MoveLeft();
         float UpperYGenerator();
 
         bool offscreen;
-        std::string sprite_path;
+        //std::string sprite_path;
         //SDL_Texture* sprite;
+        u16* spriteGfx;
 };
 
 #endif

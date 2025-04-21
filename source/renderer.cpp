@@ -51,8 +51,8 @@ void Renderer::Render(Bird &bird, Pipe &pipe_1, Pipe &pipe_2){
 
     // DrawBackground(sdl_renderer);
     bird.DrawYourself(*this);
-    // pipe_1.DrawYourself(sdl_renderer);
-    // pipe_2.DrawYourself(sdl_renderer);
+    pipe_1.DrawYourself(*this);
+    //pipe_2.DrawYourself(*this);
 
     // DrawGround(sdl_renderer);
 

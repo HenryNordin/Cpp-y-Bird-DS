@@ -13,6 +13,7 @@ int main(int argc, char **argv) {
 	vramSetBankA(VRAM_A_MAIN_BG);
     // map bank B for sprites
     vramSetBankB(VRAM_B_MAIN_SPRITE);
+
     // Initialize oam
     oamInit(&oamMain, SpriteMapping_1D_32, false);
 

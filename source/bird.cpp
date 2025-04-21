@@ -14,9 +14,10 @@ Bird::Bird() {
     collided = false;
 
     // Load sprite graphics into VRAM
-    spriteGfx = oamAllocateGfx(&oamMain, SpriteSize_32x16, SpriteColorFormat_256Color);  // Use 16Color format
-    dmaCopy(bird_spritesheetTiles, spriteGfx, bird_spritesheetTilesLen);
-    dmaCopy(bird_spritesheetPal, SPRITE_PALETTE, bird_spritesheetPalLen);
+    spriteGfx = oamAllocateGfx(&oamMain, SpriteSize_32x16, SpriteColorFormat_16Color);
+    dmaCopy(bird_spritesheetTiles, &spriteGfx[0], bird_spritesheetTilesLen);
+    dmaCopy(bird_spritesheetPal, &SPRITE_PALETTE[0], bird_spritesheetPalLen);
+    //dmaCopy(bird_spritesheetPal, &SPRITE_PALETTE[0], 32);
 }
 
 bool Bird::GetAlive(){
@@ -25,7 +26,8 @@ bool Bird::GetAlive(){
 }
 
 void Bird::SetCollided(){
-    collided = true;
+    //collided = true;
+    collided = false;
 }
 
 void Bird::RoofCollision(){
@@ -73,13 +75,14 @@ void Bird::Update(){
 }
 
 void Bird::DrawYourself(Renderer &renderer){
+    //dmaCopy(bird_spritesheetPal, SPRITE_PALETTE, bird_spritesheetPalLen);
     int tileOffset = 0;
 
     if (velocity > -2) {
-        tileOffset = 512; // skip the first sprite (32x16 = 512 bytes for 256-color)
+        tileOffset = 256; // skip the first sprite (32x16 = 512 bytes for 256-color)
     }
 
-    oamSet(&oamMain, 0, x, y, 0, 0, SpriteSize_32x16, SpriteColorFormat_256Color,
+    oamSet(&oamMain, 0, x, y, 0, 0, SpriteSize_32x16, SpriteColorFormat_16Color,
         (u16*)((u8*)spriteGfx + tileOffset), -1, false, false, false, false, false);
 
 }

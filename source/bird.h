@@ -26,14 +26,14 @@ class Bird {
 
         float velocity = 0;
 
-        const double gravity = 0.5;
+        const double gravity = 0.4;
 
         float x,y;
 
         void RoofCollision();
         void GroundCollision();
 
-        std::string sprite_path;
+        //std::string sprite_path;
 
         int state;
         u16* spriteGfx;
