@@ -26,7 +26,7 @@ class Bird {
 
         float velocity = 0;
 
-        const double gravity = 0.4;
+        const double gravity = 0.3;
 
         float x,y;
 
