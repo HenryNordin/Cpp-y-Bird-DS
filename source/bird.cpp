@@ -83,7 +83,13 @@ void Bird::DrawYourself(Renderer &renderer){
     }
     //iprintf("Birdsprite: %d\n", (int)bird_spritesheetPalLen);
 
-    oamSet(&oamMain, 0, x, y, 0, 0, SpriteSize_32x16, SpriteColorFormat_16Color,
+    oamSet(&oamMain, 
+        0,  // Sprite ID
+        x,y,// Position 
+        1,  // Priority 
+        0,  // Palette index
+        SpriteSize_32x16, 
+        SpriteColorFormat_16Color,
         (u16*)((u8*)spriteGfx + tileOffset), -1, false, false, false, false, false);
 
 }

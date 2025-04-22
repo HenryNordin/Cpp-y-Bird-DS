@@ -53,14 +53,33 @@ void Pipe::DrawYourself(Renderer &renderer, int baseId){
     }
 
     // Top pipe(s)
-    oamSet(&oamMain, baseId, x, upper_y, 0, 1, SpriteSize_32x64, SpriteColorFormat_16Color,
+    oamSet(&oamMain, 
+        baseId,     // Sprite ID 
+        x, upper_y, // Position
+        2,          // Priority
+        1,          // Palette index
+        SpriteSize_32x64, 
+        SpriteColorFormat_16Color,
         (u16*)((u8*)spriteGfx + tileOffset), -1, false, false, false, false, false);
+
     // Extends above - tileoffset 512 (to only draw middle part of pipe)
-    oamSet(&oamMain, baseId + 2, x, upper_y-64, 0, 1, SpriteSize_32x64, SpriteColorFormat_16Color,
+    oamSet(&oamMain, 
+        baseId + 2,
+        x, upper_y-64,
+        2, 
+        1, 
+        SpriteSize_32x64, 
+        SpriteColorFormat_16Color,
             (u16*)((u8*)spriteGfx + 768), -1, false, false, false, false, false);
     
     // Bottom pipe
-    oamSet(&oamMain, baseId + 1, x, lower_y, 0, 1, SpriteSize_32x64, SpriteColorFormat_16Color,
+    oamSet(&oamMain, 
+        baseId + 1, 
+        x, lower_y, 
+        2, 
+        1, 
+        SpriteSize_32x64, 
+        SpriteColorFormat_16Color,
          (u16*)((u8*)spriteGfx), -1, false, false, false, false, false);
 }
 
@@ -90,20 +109,21 @@ float Pipe::UpperYGenerator(){
     float rng = ((float)rand() / (float)RAND_MAX) * (max - min) + min;
 
 
-    iprintf("RNG: %f\n", rng);
+    //iprintf("RNG: %f\n", rng);
     return (float)rng;
 }
 
 bool Pipe::CollideWithBird(Bird bird){
     // Top
-    if ((x < bird.GetX() + 32) && (x + 64 > bird.GetX()) && (upper_y < bird.GetY() + 32)
-            && (upper_y + 256 > bird.GetY())) {
+    if ((x < bird.GetX() + 16) && (x + 32 > bird.GetX()) && (upper_y < bird.GetY() + 16)
+            && (upper_y + 64 > bird.GetY())) {
+        iprintf("BOOM\n");
         return true;
     }
-    // Bottom
-    if ((x < bird.GetX() + 32) && (x + 64 > bird.GetX()) && (lower_y < bird.GetY() + 32)
-            && (lower_y + 256 > bird.GetY())) {
-        return true;
-    }
+    // // Bottom
+    // if ((x < bird.GetX() + 32) && (x + 64 > bird.GetX()) && (lower_y < bird.GetY() + 32)
+    //         && (lower_y + 256 > bird.GetY())) {
+    //     return true;
+    // }
     return false;
 }
