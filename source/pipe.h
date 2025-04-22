@@ -7,9 +7,9 @@
 
 class Pipe {
     public:
-        Pipe(float x_start);
+        Pipe(float x_start, bool initial);
         void Update();
-        void DrawYourself(Renderer &renderer);
+        void DrawYourself(Renderer &renderer, int baseId);
         //SDL_Renderer* renderer);
         bool CollideWithBird(Bird bird);
     private:
@@ -21,6 +21,7 @@ class Pipe {
         bool offscreen;
         //std::string sprite_path;
         //SDL_Texture* sprite;
+        bool initial;
         u16* spriteGfx;
 };
 

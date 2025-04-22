@@ -2,18 +2,17 @@
 #include <iostream>
 int score = 0;
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : pipe1(400.0f), pipe2(625.0f)
+    : pipe1(512.0f, true), pipe2(656.0f, false)
 {
     running = false;   
 }
 
 void Game::Run(Controller const &controller, Renderer &renderer, double MsPerFrame){
     running = true;
-    unsigned int frame_start;
-    unsigned int frame_end;
-    unsigned int frame_duration;
+    //unsigned int frame_start;
+    //unsigned int frame_end;
+    //unsigned int frame_duration;
     int frame_count = 0;
-    
 
     while(running) {
         consoleClear();

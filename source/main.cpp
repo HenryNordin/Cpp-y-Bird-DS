@@ -13,13 +13,15 @@ int main(int argc, char **argv) {
 	vramSetBankA(VRAM_A_MAIN_BG);
     // map bank B for sprites
     vramSetBankB(VRAM_B_MAIN_SPRITE);
+    // map bank c for foreground
+    //vramSetBankC(VRAM_C_MAIN_BG);
 
     // Initialize oam
     oamInit(&oamMain, SpriteMapping_1D_32, false);
 
     // Bottom Screen
     videoSetModeSub(MODE_0_2D);
-    vramSetBankC(VRAM_C_SUB_BG);
+    vramSetBankH(VRAM_H_SUB_BG);
     consoleDemoInit(); // Console debug output
     BG_PALETTE_SUB[0] = RGB15(13, 7, 6);
     
