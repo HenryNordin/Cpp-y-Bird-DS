@@ -2,10 +2,17 @@
 
 Cpp-y Bird DS is a port of my C++ Flappy Bird clone, Cpp-y Bird, now for the Nintendo DS.
 
+## Prerequisites
+
+You need:
+
+- [devkitPro](https://devkitpro.org/) installed (with devkitARM and libnds)
+- make
+
+
 ## Compile
 
-Clone the repository:
-
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/HenryNordin/Cpp-y-Bird-DS.git
+cd Cpp-y-Bird-DS
+make
