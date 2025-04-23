@@ -7,6 +7,11 @@
 
 #include "bird_spritesheet.h"
 
+
+
+#include <chrono>
+#include <thread>
+
 Bird::Bird() {
     x = 128;
     y = 0;
@@ -21,13 +26,13 @@ Bird::Bird() {
 }
 
 bool Bird::GetAlive(){
-    return true; // so never dies
-    //return alive; - OBS!! TEMP off
+    //return true; // so never dies
+    return alive; //- OBS!! TEMP off
 }
 
 void Bird::SetCollided(){
-    //collided = true;
-    collided = false;
+    collided = true;
+    //collided = false;
 }
 
 void Bird::RoofCollision(){
@@ -43,7 +48,8 @@ void Bird::GroundCollision(){
     {
         y = 155;
         velocity = 0;
-        //alive = false; - OBS!! TEMP off
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        alive = false; //- OBS!! TEMP off
         
         //sprite_path = "assets/images/bird_sprite_2.png"; - placeholder
     }
@@ -52,9 +58,6 @@ void Bird::GroundCollision(){
 void Bird::Fly(){
     if (!collided || invincible) {
         velocity = -3.5;
-        if (velocity < -2) {
-            //sprite_path = "assets/images/bird_sprite_3.png"; -  placeholder
-        }
     }
 }
 
@@ -63,6 +66,11 @@ void Bird::Fall(){
     y += velocity;
     if (velocity > 3.5) {
         velocity = 3.5;
+    }
+
+
+    if (y >= 100 && !gameStarted) {
+        Fly();
     }
 }
 
@@ -75,8 +83,7 @@ void Bird::Update(){
 }
 
 void Bird::DrawYourself(Renderer &renderer){
-    //dmaCopy(bird_spritesheetPal, SPRITE_PALETTE, bird_spritesheetPalLen);
-    int tileOffset = 0;
+    tileOffset = 0;
 
     if (velocity > -2) {
         tileOffset = 256; // skip the first sprite (32x16 = 512 bytes for 256-color)
@@ -100,4 +107,21 @@ float Bird::GetX(){
 
 float Bird::GetY(){
     return y;
+}
+
+void Bird::Reset(){
+    y = 0;
+    alive = true;
+    collided = false;
+    gameStarted = false;
+}
+
+bool Bird::GetStarted(){
+    return gameStarted;
+//
+}
+
+void Bird::SetStarted(bool start){
+    gameStarted = start;
+//
 }

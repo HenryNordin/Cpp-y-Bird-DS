@@ -2,7 +2,7 @@
 #include <iostream>
 int score = 0;
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : pipe1(512.0f, true), pipe2(656.0f, false)
+    : pipe1(384.0f, true), pipe2(528.0f, false)
 {
     running = false;   
 }
@@ -16,7 +16,7 @@ void Game::Run(Controller const &controller, Renderer &renderer, double MsPerFra
 
     while(running) {
         consoleClear();
-        iprintf("X: %d, Y: %d\n", (int)bird.GetX(), (int)bird.GetY());
+        //iprintf("X: %d, Y: %d\n", (int)bird.GetX(), (int)bird.GetY());
 
         controller.HandleInput(running, bird);
         Update();
@@ -28,12 +28,17 @@ void Game::Run(Controller const &controller, Renderer &renderer, double MsPerFra
 
 
 void Game::Update() {
-    bird.Update();
-    pipe1.Update(); 
-    pipe2.Update();
-
     if (bird.GetAlive() == false){
-        running = false;
+        //iprintf("Dead");
+        //running = false;
+        Reset();
+    } else {
+        bird.Update();
+        if (bird.GetStarted()){
+            pipe1.Update(); 
+            pipe2.Update();
+        }
+        //iprintf("alive");
     }
     CollisionDetection(bird, pipe1, pipe2);
 }
@@ -44,6 +49,13 @@ void Game::CollisionDetection(Bird& bird, Pipe pipe1, Pipe pipe2) {
     if (collided) {
         bird.SetCollided();
     }
+}
+
+
+void Game::Reset(){
+    bird.Reset();
+    pipe1.Reset(); 
+    pipe2.Reset();
 }
 
 int Game::GetScore() const { return score;}

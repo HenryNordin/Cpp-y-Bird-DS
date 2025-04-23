@@ -28,8 +28,8 @@ Renderer::~Renderer() {
 
 void Renderer::Render(Bird &bird, Pipe &pipe_1, Pipe &pipe_2){
     bird.DrawYourself(*this);
-    pipe_1.DrawYourself(*this, 1);
-    pipe_2.DrawYourself(*this, 4);
+    pipe_1.DrawYourself(1);
+    pipe_2.DrawYourself(4);
     swiWaitForVBlank();
     oamUpdate(&oamMain);
 }

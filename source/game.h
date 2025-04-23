@@ -21,6 +21,7 @@ class Game {
         Pipe pipe1;
         Pipe pipe2;
         void Update();
+        void Reset();
         void CollisionDetection(Bird& bird, Pipe pipe1, Pipe pipe2);
 
 };

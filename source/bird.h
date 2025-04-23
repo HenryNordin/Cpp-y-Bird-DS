@@ -18,11 +18,18 @@ class Bird {
         void Fly();
         void Fall();
         void DrawYourself(Renderer &renderer);
+        void Reset();
+
+
+        bool GetStarted();
+        
+        void SetStarted(bool start);
 
     private:
         bool collided;
         bool invincible;
         bool alive;
+        bool gameStarted;
 
         float velocity = 0;
 
@@ -37,6 +44,7 @@ class Bird {
 
         int state;
         u16* spriteGfx;
+        int tileOffset;
 };
 
 #endif
