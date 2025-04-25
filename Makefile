@@ -33,6 +33,11 @@ ICON     :=
 # this is relative to the Makefile
 NITRO    :=
 
+# Game (sub)title
+GAME_TITLE    := Cpp-y Bird DS
+GAME_SUBTITLE1 := A flappy bird clone
+GAME_SUBTITLE2 := coded in C++
+
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
@@ -47,7 +52,7 @@ LDFLAGS   = -specs=ds_arm9.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project (order is important)
 #---------------------------------------------------------------------------------
-LIBS := -lnds9
+LIBS := -lfat -lnds9
 
 # automatigically add libraries for NitroFS
 ifneq ($(strip $(NITRO)),)
@@ -202,7 +207,7 @@ $(SOUNDBANK) : $(MODFILES)
 $(GAME_ICON): $(notdir $(ICON))
 #---------------------------------------------------------------------------------
 	@echo convert $(notdir $<)
-	@grit $< -g -gt -gB4 -gT FF00FF -m! -p -pe 16 -fh! -ftr
+	@grit $< -g -gt -gB4 -m! -p -pe 16 -fh! -ftr 
 
 -include $(DEPSDIR)/*.d
 
