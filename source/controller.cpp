@@ -9,10 +9,8 @@ Controller::Controller() {}
 void Controller::HandleInput(bool &running, Bird &bird) const {
     scanKeys();
     u16 keys = keysHeld();  // Get currently held buttons
-    
     touchPosition touch;     // Create touchPosition struct
     touchRead(&touch);       // Read touch input
-    u16 keysDownNow = keysDown();
 
     if ((keys & KEY_A) || (keys & KEY_TOUCH)) {  
         bird.Fly();  // Make the bird fly when "A" is pressed
