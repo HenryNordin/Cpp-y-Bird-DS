@@ -153,20 +153,20 @@ float Pipe::UpperYGenerator(){
 }
 
 bool Pipe::CollideWithBird(Bird bird){
-    // // Upper
-    // if ((x < bird.GetX() + 16) && (x + 32 > bird.GetX()) && (0 < bird.GetY() + 16)
-    //         && (upper_y + 64 > bird.GetY())) {
-    //     //iprintf("2-OKAYYYY\n");
-    //     return true;
-    // }
+    // Upper
+    if ((x < bird.GetX() + 16) && (x + 32 > bird.GetX()) && (0 < bird.GetY() + 16)
+            && (upper_y + 64 > bird.GetY())) {
+        //iprintf("2-OKAYYYY\n");
+        return true;
+    }
 
-    // //iprintf("X: %d, Upp_Y: %d, Low_Y: %d\n", (int)x, (int)upper_y, (int)lower_y);
-    // // Lower
-    // if ((x < bird.GetX() + 16) && (x + 32 > bird.GetX()) && (upper_y + pipe_gap < bird.GetY() + 16)
-    //         && (upper_y + 64 + pipe_gap > bird.GetY())) {
-    //     //iprintf("4-YESSSSSSSSSSSSS\n");
-    //     return true;
-    // }
+    //iprintf("X: %d, Upp_Y: %d, Low_Y: %d\n", (int)x, (int)upper_y, (int)lower_y);
+    // Lower
+    if ((x < bird.GetX() + 16) && (x + 32 > bird.GetX()) && (upper_y + pipe_gap < bird.GetY() + 16)
+            && (upper_y + 64 + pipe_gap > bird.GetY())) {
+        //iprintf("4-YESSSSSSSSSSSSS\n");
+        return true;
+    }
     return false;
 }
 
