@@ -23,6 +23,10 @@ Pipe::Pipe(float x_init, bool initial_in) {
     offscreen = false;
     initial = initial_in;
 
+    // if (!initial){
+    //     score + 1;
+    // }
+
     spriteGfx = oamAllocateGfx(&oamMain, SpriteSize_32x64, SpriteColorFormat_16Color);  // Use 16Color format
     dmaCopy(pipe_spriteTiles, spriteGfx, pipe_spriteTilesLen);
     dmaCopy(pipe_spritePal, &SPRITE_PALETTE[16], 32);
@@ -126,6 +130,16 @@ void Pipe::MoveLeft(){
         lower_y = upper_y + pipe_gap;
     }
 
+    // Score Increase
+    if (x == 128){
+        int val = GetScore();
+        SetScore(val+1);
+    }
+    if (x == 0){
+        int val = GetScore();
+        SetScore(val+1);
+    }
+
     if (x == 256.0f){
         offscreen = false;
     }
@@ -139,20 +153,20 @@ float Pipe::UpperYGenerator(){
 }
 
 bool Pipe::CollideWithBird(Bird bird){
-    // Upper
-    if ((x < bird.GetX() + 16) && (x + 32 > bird.GetX()) && (0 < bird.GetY() + 16)
-            && (upper_y + 64 > bird.GetY())) {
-        //iprintf("2-OKAYYYY\n");
-        return true;
-    }
+    // // Upper
+    // if ((x < bird.GetX() + 16) && (x + 32 > bird.GetX()) && (0 < bird.GetY() + 16)
+    //         && (upper_y + 64 > bird.GetY())) {
+    //     //iprintf("2-OKAYYYY\n");
+    //     return true;
+    // }
 
-    //iprintf("X: %d, Upp_Y: %d, Low_Y: %d\n", (int)x, (int)upper_y, (int)lower_y);
-    // Lower
-    if ((x < bird.GetX() + 16) && (x + 32 > bird.GetX()) && (upper_y + pipe_gap < bird.GetY() + 16)
-            && (upper_y + 64 + pipe_gap > bird.GetY())) {
-        //iprintf("4-YESSSSSSSSSSSSS\n");
-        return true;
-    }
+    // //iprintf("X: %d, Upp_Y: %d, Low_Y: %d\n", (int)x, (int)upper_y, (int)lower_y);
+    // // Lower
+    // if ((x < bird.GetX() + 16) && (x + 32 > bird.GetX()) && (upper_y + pipe_gap < bird.GetY() + 16)
+    //         && (upper_y + 64 + pipe_gap > bird.GetY())) {
+    //     //iprintf("4-YESSSSSSSSSSSSS\n");
+    //     return true;
+    // }
     return false;
 }
 
@@ -160,4 +174,14 @@ void Pipe::Reset(){
     oamUpdate(&oamMain);
     offscreen = false;
     x = x_start;
+    score = 0;
+}
+
+int Pipe::GetScore(){
+
+    return score;
+}
+
+void Pipe::SetScore(int value){
+    score = value;
 }

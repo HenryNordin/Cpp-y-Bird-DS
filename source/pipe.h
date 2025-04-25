@@ -11,6 +11,11 @@ class Pipe {
         void DrawYourself(int baseId);
         bool CollideWithBird(Bird bird);
         void Reset();
+
+        int GetScore();
+        
+        void SetScore(int value);
+
     private:
         float x, upper_y, lower_y, x_start;
         const float pipe_gap = 128;
@@ -20,6 +25,8 @@ class Pipe {
         bool offscreen;
         bool initial;
         u16* spriteGfx;
+
+        int score = 0;
 };
 
 #endif

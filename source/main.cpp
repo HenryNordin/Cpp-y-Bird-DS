@@ -4,6 +4,8 @@
 #include "game.h"
 #include "controller.h"
 
+#include <fat.h>
+
 //---------------------------------------------------------------------------------
 int main(int argc, char **argv) {
 //---------------------------------------------------------------------------------
@@ -24,6 +26,11 @@ int main(int argc, char **argv) {
     vramSetBankH(VRAM_H_SUB_BG);
     consoleDemoInit(); // Console debug output
     BG_PALETTE_SUB[0] = RGB15(13, 7, 6);
+
+    if (!fatInitDefault()) {
+        iprintf("FAT init failed.\n");
+        return 1;
+    }
     
 
 	const int screen_width{256};

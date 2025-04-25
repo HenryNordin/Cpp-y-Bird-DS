@@ -17,6 +17,8 @@ class Game {
 
     private:
         bool running;
+        int score;
+        int highScore;
         Bird bird;
         Pipe pipe1;
         Pipe pipe2;
