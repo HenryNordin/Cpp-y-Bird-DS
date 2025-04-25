@@ -1,6 +1,17 @@
 # Cpp-y Bird DS
 
-Cpp-y Bird DS is a port of my C++ Flappy Bird clone, Cpp-y Bird, now for the Nintendo DS.
+Cpp-y Bird DS is a port of my C++ Flappy Bird clone, Cpp-y Bird, now for the Nintendo DS!
+
+## Features
+- Simple Controls – Just tap the screen or the A-button to make your bird fly!
+- Infinite gameplay – Survive as long as you can in an infinite level
+- Randomized Pipe Generation – New obstacle layout every time you play
+- Score Tracker – Watch your high score climb with each run
+- Saves High Score – Keeps your best score!
+- Runs on Real Hardware – DSi (TWiLight Menu++) verified!
+- Tiny File Size – Takes up barely any space!
+- Coded in C++
+
 
 ## Prerequisites
 
