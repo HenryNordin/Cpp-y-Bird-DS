@@ -26,8 +26,8 @@ void Game::Run(Controller const &controller, Renderer &renderer, double MsPerFra
     while(running) {
         consoleClear();
         //iprintf("X: %d, Y: %d\n", (int)bird.GetX(), (int)bird.GetY());
-        iprintf("\n\n\n       High Score: %d\n", highScore);
-        iprintf("          Score: %d", score);
+        iprintf("\n\n\n         High Score: %d\n", highScore);
+        iprintf("            Score: %d", score);
 
         if (!bird.GetStarted()){
             iprintf("\n\n\n   Touch or press A to play!");
