@@ -33,7 +33,7 @@ void Game::Run(Controller const &controller, Renderer &renderer, double MsPerFra
             iprintf("\n\n\n   Touch or press A to play!");
         }
 
-        controller.HandleInput(running, bird);
+        controller.HandleInput(running, bird, highScore);
         Update();
         renderer.Render(bird, pipe1, pipe2);
         //pipe1.PointUp();
